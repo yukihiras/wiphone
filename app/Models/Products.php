@@ -30,15 +30,14 @@ class Products extends Model
         return $list;
     }
 
-    // public function listProductsByCate($params = [])
-    // {
-    //     $query = DB::table($this->table)
-    //         ->select($this->fillable)
-    //         ->join('categories', 'categories.id', '=', 'products.cate_id')
-    //         ->where('cate_id', '=', 'categories.id');
-    //     $listProByCate = $query->get();
-    //     return $listProByCate;
-    // }
+    public function loadListProductByCate($id_category, $param = []){
+        $query = DB::table($this->table)
+            ->join('categories', 'categories.id', '=', 'products.cate_id')
+            ->select($this->fillable)
+            ->where('product.cate_id', '=', $id_category);
+        $list = $query->paginate(9);
+        return $list;
+    }
 
     public function saveNew($params)
     {

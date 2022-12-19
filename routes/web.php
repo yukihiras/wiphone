@@ -22,6 +22,8 @@ Route::get('/', "Home\HomeController@home",)->name('clientHome');
 //Route::get('/home', "Home\NavController@nav",);
 Route::get('/home/productDetail/{id}', "Home\SingleProductController@detailProduct",)
     ->name('route_Client_Product_Detail');
+Route::get('categories/{id}', 'Home\ProductByCateController@proByCate')->name('ProByCate');
+
 
 //Cart
 Route::get('addToCart/{id}', 'Home\showCartController@addToCart')->name('clientAddToCart');
