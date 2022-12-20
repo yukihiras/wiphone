@@ -40,7 +40,7 @@
                         <span>Danh Mục: </span>
                         <ul class="d-flex">
                             <li>
-                                <a href="#">{{$objItem->cate_id}}</a>
+                                <a href="{{route('ProByCate',['id_cate'=> $objItem->cate_id])}}">{{$objItem->cateName}}</a>
                             </li>
                         </ul>
                     </div>
@@ -66,6 +66,64 @@
 
 
 <!-- Product Area Start -->
+<div class="product-area related-product">
+    <div class="container">
+        <!-- Section Title & Tab Start -->
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title text-center m-0">
+                    <h2 class="title">Sản phẩm tương tự</h2>
+                    <p>Có rất nhiều các lựa chọn khác cho bạn</p>
+                </div>
+            </div>
+        </div>
+        <!-- Section Title & Tab End -->
+        <div class="row">
+            <div class="col">
+                <div class="new-product-slider swiper-container slider-nav-style-1">
+                    <div class="swiper-wrapper">
+                        @foreach($listProByCate as $item)
+                        <div class="swiper-slide">
+                            <!-- Single Prodect -->
+                            <div class="product">
+                                <div class="thumb">
+                                    <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}" class="image">
+                                        <img src="{{$item->image ? ''. Storage::url($item->image):'http://placehold.it/100x100'}}" alt="Product" />
+                                        <img class="hover-image" src="{{$item->image ? ''. Storage::url($item->image):'http://placehold.it/100x100'}}" alt="Product" />
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <span class="category"><a href="#">{{$item->cateName}}</a></span>
+                                    <h5 class="title"><a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}">{{$item->name}}
+                                        </a>
+                                    </h5>
+                                    <span class="price">
+                                        <span class="new">Giá: {{number_format($item->price)}}đ</span>
+                                    </span>
+                                </div>
+                                <div class="actions">
+                                    <a href=""
+                                       class="action add-to-cart btn btn secondary pe-7s-shopbag"
+                                       data-url="{{route('clientAddToCart', ['id' => $item->id])}}"
+                                    ></a>
+                                    <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i class="pe-7s-like"></i></button>
+                                    <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}" class="action quickview btn btn secondary pe-7s-look"></a>
 
+                                </div>
+                            </div>
+
+                        </div>
+                        @endforeach
+                    </div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-buttons">
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Product Area End -->
 @endsection

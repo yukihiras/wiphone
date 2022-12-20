@@ -15,14 +15,14 @@ class ProductByCateController extends Controller
         $this->v = [];
     }
 
-    public function proByCate($id, Request $request){
+    public function proByCate($id_cate, Request $request){
         $categories = new Categories();
         $this->v['exitParams'] = $request->all();
         $this->v['list'] = $categories->listCategories();
 
         $listProByCate = new Products();
         $this->v['exitParams'] = $request->all();
-        $this->v['listProByCate'] = $listProByCate->loadListProductByCate($id);
+        $this->v['listProByCate'] = $listProByCate->loadListProductByCate($id_cate);
         return view('client.proByCate', $this->v);
     }
 }

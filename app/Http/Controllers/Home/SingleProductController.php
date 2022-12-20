@@ -15,7 +15,7 @@ class SingleProductController extends Controller
     {
         $this->v = [];
     }
-    public function detailProduct($id, Request $request)
+    public function detailProduct($id, $id_cate,  Request $request)
     {
 
         $categories = new Categories();
@@ -35,6 +35,10 @@ class SingleProductController extends Controller
         $modelSanPham = new Products();
         $objItem = $modelSanPham->loadOne($id);
         $this->v['objItem'] = $objItem;
+
+        $listProByCate = new Products();
+        $this->v['exitParams'] = $request->all();
+        $this->v['listProByCate'] = $listProByCate->loadListProductByCate($id_cate);
         return view('client.productDetail', $this->v);
     }
 }

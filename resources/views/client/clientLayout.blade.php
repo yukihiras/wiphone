@@ -140,7 +140,7 @@
                         <div class="main-menu position-relative">
                             <ul>
                                 @foreach($list as $item)
-                                <li><a href="{{route('ProByCate',['id'=> $item->id])}}">{{$item->name}}</a></li>
+                                <li><a href="{{route('ProByCate',['id_cate'=> $item->id])}}">{{$item->name}}</a></li>
                                 @endforeach
                             </ul>
                         </div>

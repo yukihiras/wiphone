@@ -86,13 +86,13 @@
                                 <span class="new">New</span>
                             </span>
                             <div class="thumb">
-                                <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id])}}" class="image">
+                                <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}" class="image">
                                     <img src="{{$item->image ? ''. Storage::url($item->image):'http://placehold.it/100x100'}}" alt="Product" class="img-responsive" />
                                     <img class="hover-image" src="{{$item->image ? ''. Storage::url($item->image):'http://placehold.it/100x100'}}" alt="Product" class="img-responsive" />
                                 </a>
                             </div>
                             <div class="content">
-                                <h5 class="title"><a class="text-center" href="{{route('route_Client_Product_Detail', ['id'=> $item->id])}}">{{$item->name}}
+                                <h5 class="title"><a class="text-center" href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}">{{$item->name}}
                                     </a>
                                 </h5>
                                 <span class="price">
@@ -105,7 +105,7 @@
                                    data-url="{{route('clientAddToCart', ['id' => $item->id])}}"
                                 ></a>
                                 <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i class="pe-7s-like"></i></button>
-                                <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id])}}" class="action quickview btn btn secondary pe-7s-look"></a>
+                                <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}" class="action quickview btn btn secondary pe-7s-look"></a>
                                 <!-- <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i class="pe-7s-refresh-2"></i></button> -->
                             </div>
                         </div>

@@ -18,6 +18,7 @@ class Products extends Model
         'products.image',
         'products.description',
         'categories.name as cateName',
+        'products.cate_id',
         'products.created_at'
     ];
     public function listProducts($params = [])
@@ -30,11 +31,11 @@ class Products extends Model
         return $list;
     }
 
-    public function loadListProductByCate($id, $param = []){
+    public function loadListProductByCate($id_cate, $param = []){
         $query = DB::table($this->table)
             ->join('categories', 'categories.id', '=', 'products.cate_id')
             ->select($this->fillable)
-            ->where('products.cate_id', '=', $id);
+            ->where('products.cate_id', '=', $id_cate);
         $list = $query->paginate(9);
         return $list;
     }
@@ -55,7 +56,11 @@ class Products extends Model
     //load ra chi tiết sản phẩm
     public function loadOne($id, $params = [])
     {
-        $query = DB::table($this->table)->where('id', '=', $id);
+        $query = DB::table($this->table)
+            ->select($this->fillable)
+            ->join('categories', 'categories.id', '=', 'products.cate_id')
+            ->where('products.id', '=', $id);
+
         $obj = $query->first();
         return $obj;
     }

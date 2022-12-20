@@ -7,8 +7,6 @@
             <div class="col-lg-9 order-lg-last col-md-12 order-md-first">
                 <!-- Shop Top Area Start -->
                 <div class="shop-top-bar d-flex">
-                    <p class="compare-product"> <span>12</span> Product Found of <span>30</span></p>
-                    <!-- Left Side End -->
                     <div class="shop-tab nav">
                         <button class="active" data-bs-target="#shop-grid" data-bs-toggle="tab">
                             <i class="fa fa-th" aria-hidden="true"></i>
@@ -51,18 +49,15 @@
                                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-30px">
                                             <!-- Single Prodect -->
                                             <div class="product">
-                                                        <span class="badges">
-                                                        <span class="new">New</span>
-                                                        </span>
                                                 <div class="thumb">
-                                                    <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id])}}" class="image">
+                                                    <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}" class="image">
                                                         <img src="{{$item->image ? ''. Storage::url($item->image):'http://placehold.it/100x100'}}" alt="Product" />
                                                         <img class="hover-image" src="{{$item->image ? ''. Storage::url($item->image):'http://placehold.it/100x100'}}" alt="Product" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <span class="category"><a href="#">{{$item->cateName}}</a></span>
-                                                    <h5 class="title"><a href="{{route('route_Client_Product_Detail', ['id'=> $item->id])}}">{{$item->name}}
+                                                    <h5 class="title"><a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}">{{$item->name}}
                                                         </a>
                                                     </h5>
                                                     <span class="price">
@@ -76,7 +71,7 @@
                                                     ></a>
                                                     <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
                                                             class="pe-7s-like"></i></button>
-                                                    <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id])}}" class="action quickview btn btn secondary pe-7s-look"></a>
+                                                    <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}" class="action quickview btn btn secondary pe-7s-look"></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -85,93 +80,81 @@
                                 </div>
                                 <div class="tab-pane fade mb-n-30px" id="shop-list">
                                     <div class="shop-list-wrapper mb-30px">
+                                        @foreach($listProByCate as $item)
                                         <div class="row">
                                             <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
                                                 <div class="product">
                                                     <div class="thumb">
-                                                        <a href="single-product.html" class="image">
-                                                            <img src="assets/images/product-image/1.webp" alt="Product" />
-                                                            <img class="hover-image" src="assets/images/product-image/1.webp" alt="Product" />
+                                                        <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}" class="image">
+                                                            <img src="{{$item->image ? ''. Storage::url($item->image):'http://placehold.it/100x100'}}" alt="Product" />
+                                                            <img class="hover-image" src="{{$item->image ? ''. Storage::url($item->image):'http://placehold.it/100x100'}}" alt="Product" />
                                                         </a>
-                                                        <span class="badges">
-                                                                <span class="new">New</span>
-                                                                </span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-7 col-lg-7 col-xl-8">
                                                 <div class="content-desc-wrap">
                                                     <div class="content">
-                                                        <span class="category"><a href="#">Accessories</a></span>
-                                                        <h5 class="title"><a href="single-product.html">Modern Smart Phone</a></h5>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                            sed do eiusmodol tempor incididunt ut labore et dolore
-                                                            magna aliqua. Ut enim ad minim veni quis nostrud
-                                                            exercitation ullamco laboris </p>
+                                                        <span class="category"><a href="#">{{$item->cateName}}</a></span>
+                                                        <h5 class="title"><a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}">{{$item->name}}</a></h5>
+                                                        <p>{{$item->description}}</p>
                                                     </div>
                                                     <div class="box-inner">
                                                                 <span class="price">
-                                                                <span class="new">$38.50</span>
+                                                                <span class="new">Giá: {{number_format($item->price)}}đ</span>
                                                                 </span>
                                                         <div class="actions">
-                                                            <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                                                    class="pe-7s-shopbag"></i></button>
+                                                            <a href=""
+                                                               class="action add-to-cart btn btn secondary pe-7s-shopbag"
+                                                               data-url="{{route('clientAddToCart', ['id' => $item->id])}}"
+                                                            ></a>
                                                             <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
                                                                     class="pe-7s-like"></i></button>
-                                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                                            <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                                    class="pe-7s-refresh-2"></i></button>
+                                                            <a href="{{route('route_Client_Product_Detail', ['id'=> $item->id, 'id_cate'=> $item->cate_id])}}" class="action quickview btn btn secondary pe-7s-look"></a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Tab Content Area End -->
+
+
                     <!--  Pagination Area Start -->
                     <div class="pro-pagination-style text-center text-lg-end" data-aos="fade-up" data-aos-delay="200">
                         <div class="pages">
                             <ul>
-                                <li class="li"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+                                <li class="li page-link active">{{$list->appends($exitParams)->links()}}
                                 </li>
-                                <li class="li"><a class="page-link" href="#">1</a></li>
-                                <li class="li"><a class="page-link active" href="#">2</a></li>
-                                <li class="li"><a class="page-link" href="#">3</a></li>
-                                <li class="li"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
                     <!--  Pagination Area End -->
                 </div>
+
                 <!-- Shop Bottom Area End -->
             </div>
+
+
+
             <!-- Sidebar Area Start -->
             <div class="col-lg-3 order-lg-first col-md-12 order-md-last">
                 <div class="shop-sidebar-wrap">
                     <!-- Sidebar single item -->
                     <div class="sidebar-widget">
-                        <h4 class="sidebar-title">Top Categories</h4>
+                        <h4 class="sidebar-title">Danh mục</h4>
                         <div class="sidebar-widget-category">
                             <ul>
-                                <li><a href="#" class="selected m-0"> All
-                                        <span>(65)</span> </a></li>
-                                <li><a href="#" class=""> Computer
-                                        <span>(12)</span> </a></li>
-                                <li><a href="#" class=""> Covid-19
-                                        <span>(22)</span> </a></li>
-                                <li><a href="#" class=""> Electronics
-                                        <span>(19)</span> </a></li>
-                                <li><a href="#" class=""> Frame Sunglasses
-                                        <span>(17)</span> </a></li>
-                                <li><a href="#" class=""> Furniture
-                                        <span>(7)</span> </a></li>
-                                <li><a href="#" class=""> Genuine Leather
-                                        <span>(9)</span> </a></li>
+                                @foreach($list as $item)
+                                <li><a href="{{route('ProByCate',['id_cate'=> $item->id])}}" class=""> {{$item->name}}
+                                        <span></span></a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
