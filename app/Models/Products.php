@@ -30,11 +30,11 @@ class Products extends Model
         return $list;
     }
 
-    public function loadListProductByCate($id_category, $param = []){
+    public function loadListProductByCate($id, $param = []){
         $query = DB::table($this->table)
             ->join('categories', 'categories.id', '=', 'products.cate_id')
             ->select($this->fillable)
-            ->where('product.cate_id', '=', $id_category);
+            ->where('products.cate_id', '=', $id);
         $list = $query->paginate(9);
         return $list;
     }
