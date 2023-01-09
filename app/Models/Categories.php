@@ -16,7 +16,7 @@ class Categories extends Model
     public function listCategories($params = [])
     {
         $query = DB::table($this->table)->select($this->fillable)->orderBy('created_at', 'DESC');
-        $list = $query->paginate(5); //mỗi trang hiển thị 5 bản ghi
+        $list = $query->paginate(8); //mỗi trang hiển thị 5 bản ghi
         return $list;
     }
 //    public function listCate($params = [])

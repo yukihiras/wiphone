@@ -30,6 +30,9 @@ Route::get('addToCart/{id}', 'Home\showCartController@addToCart')->name('clientA
 Route::get('/showCart', 'Home\showCartController@showCart')->name('clientShowCart');
 Route::get('/updateCart', 'Home\showCartController@updateCart')->name('clientUpdateCart');
 Route::get('/deleteCart', 'Home\showCartController@deleteCart')->name('clientDeleteCart');
+Route::get('/clearCart', 'Home\showCartController@clearCart')->name('clientClearCart');
+
+
 
 
 

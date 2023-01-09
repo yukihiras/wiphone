@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Categories;
 use App\Models\Products;
+use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 
 class showCartController extends Controller
@@ -85,6 +86,13 @@ class showCartController extends Controller
             return response()->json(['showCart' => $showCart, 'code' => 200], 200);
         }
     }
+
+    public function clearCart(){
+        \Cart::clear();
+        session()->flash('success','Xóa tất cả giỏ hàng thành công!');
+        return redirect()->route('clientShowCart');
+    }
+
 
 
 }

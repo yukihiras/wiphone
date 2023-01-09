@@ -1,8 +1,18 @@
 @extends('client.clientLayout')
 @section('content')
-<!-- Cart Area Start -->
+
 <div class="cart-main-area pt-100px pb-100px" data-url="{{route('clientDeleteCart')}}">
     <div class="container">
+        <!-- Cart Area Start -->
+        @if ( Session::has('success') )
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <strong>{{ Session::get('success') }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+        @endif
         <h3 class="cart-page-title">Your cart items</h3>
         <div class="row ">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -11,7 +21,6 @@
                         <table class="update_cart_url" data-url="{{route('clientUpdateCart')}}">
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Ảnh sp</th>
                                     <th>Tên</th>
                                     <th>Giá</th>
@@ -29,7 +38,6 @@
                                         $totalCart += $cartItem['price'] * $cartItem['quantity'];
                                     @endphp
                                 <tr>
-                                    <td>{{$id}}</td>
                                     <td class="product-thumbnail">
                                         <a href="#"><img class="img-responsive ml-15px" src="{{$cartItem['image'] ? ''. Storage::url($cartItem['image']):'http://placehold.it/100x100'}}" alt="" /></a>
                                     </td>
@@ -58,7 +66,7 @@
                                 </div>
                                 <div class="cart-clear">
                                     <button>Cập nhật giỏ hàng</button>
-                                    <a href="#">Xóa toàn bộ giỏ hàng</a>
+                                    <a href="{{route('clientClearCart')}}">Xóa toàn bộ giỏ hàng</a>
                                 </div>
                             </div>
                         </div>

@@ -103,3 +103,4 @@ class BannerController extends Controller
         return redirect()->route($method_route)->with('success', 'Xoá thành công ');;
     }
 }
+
